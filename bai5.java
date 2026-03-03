@@ -1,0 +1,46 @@
+package ExFive;
+
+public class bai5 {
+        interface MessageService {
+        void sendMessage(String message);
+    }
+
+    static class EmailService implements MessageService {
+        public void sendMessage(String message) {
+            System.out.println("Email sent: " + message);
+        }
+    }
+
+    static class SMSService implements MessageService {
+        public void sendMessage(String message) {
+            System.out.println("SMS sent: " + message);
+        }
+    }
+
+    static class Notification {
+
+        private MessageService service;
+
+        // Setter Injection
+        public void setMessageService(MessageService service) {
+            this.service = service;
+        }
+
+        public void notifyUser(String message) {
+            service.sendMessage(message);
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Notification notification = new Notification();
+
+        // Dùng Email
+        notification.setMessageService(new EmailService());
+        notification.notifyUser("Hello via Email!");
+
+        // Dùng SMS
+        notification.setMessageService(new SMSService());
+        notification.notifyUser("Hello via SMS!");
+    }
+}
