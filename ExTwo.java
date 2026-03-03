@@ -1,0 +1,42 @@
+package Chapter02;
+
+public class ExTwo {
+interface Notification {
+        void notifyUser();
+    }
+
+    static class SMSNotification implements Notification {
+        public void notifyUser() {
+            System.out.println("Sending SMS notification...");
+        }
+    }
+
+    static class EmailNotification implements Notification {
+        public void notifyUser() {
+            System.out.println("Sending Email notification...");
+        }
+    }
+
+    static class NotificationFactory {
+
+        public static Notification createNotification(String channel) {
+
+            if (channel.equalsIgnoreCase("SMS")) {
+                return new SMSNotification();
+            } else if (channel.equalsIgnoreCase("EMAIL")) {
+                return new EmailNotification();
+            } else {
+                throw new IllegalArgumentException("Unknown type");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Notification n1 = NotificationFactory.createNotification("SMS");
+        n1.notifyUser();
+
+        Notification n2 = NotificationFactory.createNotification("EMAIL");
+        n2.notifyUser();
+    }
+}
