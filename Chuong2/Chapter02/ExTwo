@@ -39,4 +39,5 @@ interface Notification {
         Notification n2 = NotificationFactory.createNotification("EMAIL");
         n2.notifyUser();
     }
+
 }
